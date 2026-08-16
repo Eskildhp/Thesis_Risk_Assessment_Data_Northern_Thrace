@@ -79,7 +79,7 @@ The analysis follows the following main steps:
 11. Select the solution with the highest silhouette score.
 12. Export the results to the `results/` folder.
 
-## Candidate cluster evaluation
+## Cluster solution evaluation
 
 The script tests:
 
@@ -93,7 +93,7 @@ The script tests:
 
 clusters.
 
-For each candidate solution, `cluster\_evaluation.csv` records:
+For each cluster solution, `cluster\_evaluation.csv` records:
 
 * `Requested\_k`
 * `Actual\_clusters`
@@ -102,13 +102,13 @@ For each candidate solution, `cluster\_evaluation.csv` records:
 * `Largest\_cluster`
 * `Mean\_cluster\_size`
 
-The evaluation table is sorted from the highest to the lowest silhouette score. The first row is therefore used to identify the preferred candidate solution.
+The evaluation table is sorted from the highest to the lowest silhouette score. The first row is therefore used to identify the preferred cluster solution.
 
 ## Outputs
 
 ### `cluster\_evaluation.csv`
 
-Summary of the silhouette score and cluster-size statistics for every tested candidate solution.
+Summary of the silhouette score and cluster-size statistics for every tested cluster solution.
 
 ### `sites\_with\_candidate\_clusters.csv`
 
@@ -124,7 +124,7 @@ Cluster\_7
 
 ### `candidate\_cluster\_profiles.csv`
 
-Mean environmental profile and number of sites for each cluster in every tested candidate solution.
+Mean environmental profile and number of sites for each cluster in every tested cluster solution.
 
 ### `best\_silhouette\_clusters.csv`
 
@@ -176,12 +176,38 @@ The external packages can be installed using:
 ```bash
 pip install numpy pandas matplotlib scipy scikit-learn
 ```
+## Software documentation
 
-A separate software-documentation section will provide the official documentation used for the individual Python functions and libraries.
+The Python workflow used the Python standard library and the official NumPy, Pandas, Matplotlib, SciPy and scikit-learn packages. The documentation listed below was used as reference when developing the script.
+
+| Package          | Functionality used in the script                     | Use in this analysis                                                                                                                     | Official documentation                                                                                                                                                                                                      |
+| ---------------- | ---------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Python `pathlib` | `Path`, `resolve()`, `parent`, `exists()`, `mkdir()` | Defines file locations for the Python script, checks that the input file exists, and creates the results folder.                 | [Python pathlib documentation](https://docs.python.org/3/library/pathlib.html)                                                                                                                                              |
+| pandas           | `read_csv()` and `DataFrame.to_csv()`                | Reads the clustering input matrix and exports the tables as CSV files.                                                         | [pandas I/O documentation](https://pandas.pydata.org/docs/user_guide/io.html)                                                                                                                                               |
+| pandas           | `DataFrame.groupby()`                                | Groups archaeological sites according to their assigned cluster so that cluster sizes and mean environmental profiles can be calculated. | [pandas DataFrame.groupby documentation](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.groupby.html)                                                                                                        |
+| pandas           | `DataFrame.merge()`                                  | Combines the number of sites in each cluster with the calculated mean environmental profiles.                                            | [pandas merge documentation](https://pandas.pydata.org/docs/reference/api/pandas.merge.html)                                                                                                                                |
+| pandas           | `concat()`                                           | Combines the environmental profile tables produced for the different cluster solutions.                                        | [pandas concat documentation](https://pandas.pydata.org/docs/reference/api/pandas.concat.html)                                                                                                                              |
+| NumPy            | `unique()`                                           | Counts the number of unique cluster labels returned for each tested cluster solution.                                                    | [NumPy unique documentation](https://numpy.org/doc/stable/reference/generated/numpy.unique.html)                                                                                                                            |
+| SciPy            | `scipy.cluster.hierarchy.linkage()`                  | Performs hierarchical agglomerative clustering using Ward's method and Euclidean distance.                                               | [SciPy linkage documentation](https://docs.scipy.org/doc/scipy/reference/generated/scipy.cluster.hierarchy.linkage.html)                                                                                                    |
+| SciPy            | `scipy.cluster.hierarchy.fcluster()`                 | Converts the hierarchical clustering into separate cluster solutions containing 3-7 clusters.                                          | [SciPy fcluster documentation](https://docs.scipy.org/doc/scipy/reference/generated/scipy.cluster.hierarchy.fcluster.html)                                                                                                  |
+| SciPy            | `scipy.cluster.hierarchy.dendrogram()`               | Produces the full and truncated dendrograms from the hierarchical clustering result.                                                     | [SciPy dendrogram documentation](https://docs.scipy.org/doc/scipy/reference/generated/scipy.cluster.hierarchy.dendrogram.html)                                                                                              |
+| scikit-learn     | `sklearn.metrics.silhouette_score()`                 | Calculates the mean silhouette coefficient for each cluster solution so the alternatives can be compared.                      | [scikit-learn silhouette_score documentation](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.silhouette_score.html)                                                                                      |
+| Matplotlib       | `pyplot.figure()` and `pyplot.savefig()`             | Creates the dendrogram figures and exports them as PNG files.                                                                            | [Matplotlib figure documentation](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.figure.html) and [Matplotlib savefig documentation](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.savefig.html) |
+
+These sources describe the software implementation of the workflow. The academic support for Ward hierarchical clustering, Euclidean distance and silhouette analysis is listed under methodological references.
+
+## Methodological references
+
+The clustering methodology and evaluation of alternative cluster solutions are based on the following sources:
+
+* Ward, J. H., Jr. (1963). Hierarchical grouping to optimize an objective function. *Journal of the American Statistical Association, 58*(301), 236-244. https://doi.org/10.1080/01621459.1963.10500845
+
+* Rousseeuw, P. J. (1987). Silhouettes: A graphical aid to the interpretation and validation of cluster analysis. *Journal of Computational and Applied Mathematics, 20*, 53-65. https://doi.org/10.1016/0377-0427(87)90125-7
+
+Ward (1963) is the basis for the hierarchical grouping procedure. Observations are successively combined into separate groups while minimizing the increase in variation within the clusters at each stage. Rousseeuw (1987) is the support for the silhouette coefficient used here to compare the alternative cluster solutions.
 
 ## Reproducibility and data availability
 
-The repository contains the clustering script, transformed clustering variables, candidate cluster assignments, evaluation results, cluster profiles, and generated dendrograms. Raw archaeological site coordinates are not included. The spatial variables included in the clustering matrix (`C\_x` and `C\_y`) are transformed analytical variables rather than raw geographic coordinates.
+The repository contains the clustering script, transformed clustering variables, cluster solutions, evaluation results, cluster profiles, and  dendrograms. Raw archaeological site coordinates are not included. The spatial variables included in the clustering matrix (`C\_x` and `C\_y`) are transformed analytical variables rather than raw geographic coordinates.
 
 The files in `results/` are outputs generated from the clustering workflow and are included to make the analytical results directly inspectable without requiring the script to be rerun.
-

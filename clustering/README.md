@@ -7,21 +7,21 @@ This folder contains the Python workflow and related data used to group the arch
 ```text
 clustering/
 ├── README.md
-├── ward\\\_clustering\\\_ruslog.py
-├── Cluster\\\_matrix\\\_Ruslog.csv
+├── ward_clustering_ruslog.py
+├── Cluster_matrix_Ruslog.csv
 ├── results/
-│   ├── best\\\_cluster\\\_profiles.csv
-│   ├── best\\\_silhouette\\\_clusters.csv
-│   ├── candidate\\\_cluster\\\_profiles.csv
-│   ├── cluster\\\_evaluation.csv
-│   ├── sites\\\_with\\\_candidate\\\_clusters.csv
-│   ├── ward\\\_dendrogram\\\_full.png
-│   └── ward\\\_dendrogram\\\_truncated.png
+│   ├── best_cluster_profiles.csv
+│   ├── best_silhouette_clusters.csv
+│   ├── candidate_cluster_profiles.csv
+│   ├── cluster_evaluation.csv
+│   ├── sites_with_candidate_clusters.csv
+│   ├── ward_dendrogram_full.png
+│   └── ward_dendrogram_truncated.png
 └── visualization/
-    ├── parallel\\\_boxplot\\\_clusters\\\_1\\\_2\\\_3.py
-    ├── parallel\\\_boxplot\\\_clusters\\\_1\\\_2\\\_3.png
-    ├── parallel\\\_boxplot\\\_clusters\\\_1\\\_2\\\_3.pdf
-    └── parallel\\\_boxplot\\\_cluster\\\_means.csv
+    ├── parallel_boxplot_clusters_1_2_3.py
+    ├── parallel_boxplot_clusters_1_2_3.png
+    ├── parallel_boxplot_clusters_1_2_3.pdf
+    └── parallel_boxplot_cluster_means.csv
 ```
 
 ## Input data
@@ -29,7 +29,7 @@ clustering/
 The clustering script reads:
 
 ```text
-Cluster\\\_matrix\\\_Ruslog.csv
+Cluster_matrix_Ruslog.csv
 ```
 
 The table contains the site identifier, site name and environmental variables for the clustering analysis.
@@ -38,20 +38,20 @@ The final clustering model uses the following fields:
 
 |Field|Description|
 |-|-|
-|`C\\\_DEM`|Standardized/scaled elevation variable|
-|`C\\\_Slope`|Standardized/scaled slope variable|
-|`C\\\_Acos`|North–south aspect component|
-|`C\\\_Asin`|East–west aspect component|
-|`C\\\_RusLog`|Log-transformed estimated soil-loss variable|
-|`C\\\_FlDist`|Standardized/scaled distance to the modelled flood zone|
-|`C\\\_x`|Transformed spatial x variable used in clustering|
-|`C\\\_y`|Transformed spatial y variable used in clustering|
+|`C_DEM`|Standardized/scaled elevation variable|
+|`C_Slope`|Standardized/scaled slope variable|
+|`C_Acos`|North–south aspect component|
+|`C_Asin`|East–west aspect component|
+|`C_RusLog`|Log-transformed estimated soil-loss variable|
+|`C_FlDist`|Standardized/scaled distance to the modelled flood zone|
+|`C_x`|Transformed spatial x variable used in clustering|
+|`C_y`|Transformed spatial y variable used in clustering|
 
 The final model uses the log-transformed RUSLE variable rather than the original RUSLE values. Distance to the modelled flood zone is maintained. Flood depth is excluded from the final clustering model.
 
 ### Spatial data note
 
-`C\\\_x` and `C\\\_y` are transformed spatial variables used to introduce a spatial component into the clustering analysis. They are not raw archaeological site coordinates. Raw x/y coordinates of archaeological sites are not included in the public repository.
+`C_x` and `C_y` are transformed spatial variables used to introduce a spatial component into the clustering analysis. They are not raw archaeological site coordinates. Raw x/y coordinates of archaeological sites are not included in the public repository.
 
 ## Data validation
 
@@ -96,58 +96,58 @@ The script tests:
 
 clusters.
 
-For each cluster solution, `cluster\\\_evaluation.csv` records:
+For each cluster solution, `cluster_evaluation.csv` records:
 
-* `Requested\\\_k`
-* `Actual\\\_clusters`
-* `Silhouette\\\_score`
-* `Smallest\\\_cluster`
-* `Largest\\\_cluster`
-* `Mean\\\_cluster\\\_size`
+* `Requested_k`
+* `Actual_clusters`
+* `Silhouette_score`
+* `Smallest_cluster`
+* `Largest_cluster`
+* `Mean_cluster_size`
 
 The evaluation table is sorted from the highest to the lowest silhouette score. The first row is therefore used to identify the preferred cluster solution.
 
 ## Outputs
 
-### `cluster\\\_evaluation.csv`
+### `cluster_evaluation.csv`
 
 Summary of the silhouette score and cluster-size statistics for every tested cluster solution.
 
-### `sites\\\_with\\\_candidate\\\_clusters.csv`
+### `sites_with_candidate_clusters.csv`
 
 Site-level table containing the clustering variables and assignments for all tested solutions:
 
 ```text
-Cluster\\\_3
-Cluster\\\_4
-Cluster\\\_5
-Cluster\\\_6
-Cluster\\\_7
+Cluster_3
+Cluster_4
+Cluster_5
+Cluster_6
+Cluster_7
 ```
 
-### `candidate\\\_cluster\\\_profiles.csv`
+### `candidate_cluster_profiles.csv`
 
 Mean environmental profile and number of sites for each cluster in every tested cluster solution.
 
-### `best\\\_silhouette\\\_clusters.csv`
+### `best_silhouette_clusters.csv`
 
 Site identifiers, site names, and cluster assignments for the candidate solution with the highest silhouette score.
 
 The selected assignment is stored as:
 
 ```text
-Cluster\\\_best\\\_silhouette
+Cluster_best_silhouette
 ```
 
-### `best\\\_cluster\\\_profiles.csv`
+### `best_cluster_profiles.csv`
 
 Mean environmental characteristics and number of sites for the clusters belonging to the highest-silhouette solution.
 
-### `ward\\\_dendrogram\\\_full.png`
+### `ward_dendrogram_full.png`
 
 Full Ward hierarchical clustering dendrogram showing the overall hierarchical structure.
 
-### `ward\\\_dendrogram\\\_truncated.png`
+### `ward_dendrogram_truncated.png`
 
 Truncated dendrogram showing the final 20 merged groups of the hierarchy.
 
@@ -158,13 +158,13 @@ Truncated dendrogram showing the final 20 merged groups of the hierarchy.
 The final three-cluster solution is visualized using:
 
 ```text
-visualization/parallel\\\_boxplot\\\_clusters\\\_1\\\_2\\\_3.py
+visualization/parallel_boxplot_clusters_1_2_3.py
 ```
 
 The visualization script reads:
 
 ```text
-results/sites\\\_with\\\_candidate\\\_clusters.csv
+results/sites_with_candidate_clusters.csv
 ```
 
 The script creates a parallel box plot comparing the standardized environmental characteristics of Clusters 1-3. The background box plots show the overall distribution of each environmental variable across all sites. The connected colored lines and markers show the mean environmental profile of each cluster.
@@ -178,21 +178,21 @@ The plotted variables are:
 * log-transformed estimated soil loss
 * distance to the modelled flood zone
 
-The transformed spatial variables `C\\\_x` and `C\\\_y` are used in the clustering analysis but are not shown in the environmental profile figure.
+The transformed spatial variables `C_x` and `C_y` are used in the clustering analysis but are not shown in the environmental profile figure.
 
 The weighting adjustment applied to the paired aspect variables and flood distance variable in the clustering matrix is reversed for the visualization so that these variables are displayed on the standardized scale. The RUSLE variable remains log-transformed.
 
 The visualization script creates the following files in the `visualization/` folder:
 
-### `parallel\\\_boxplot\\\_clusters\\\_1\\\_2\\\_3.png`
+### `parallel_boxplot_clusters_1_2_3.png`
 
 300 dpi PNG version of the environmental cluster profile figure.
 
-### `parallel\\\_boxplot\\\_clusters\\\_1\\\_2\\\_3.pdf`
+### `parallel_boxplot_clusters_1_2_3.pdf`
 
 PDF version of the environmental cluster profile figure.
 
-### `parallel\\\_boxplot\\\_cluster\\\_means.csv`
+### `parallel_boxplot_cluster_means.csv`
 
 Mean standardized value and number of sites for each plotted environmental variable and cluster.
 
@@ -203,7 +203,7 @@ The Ward clustering script and input CSV should remain in the same `clustering/`
 From a terminal opened in this folder, run:
 
 ```bash
-python ward\\\_clustering\\\_ruslog.py
+python ward_clustering_ruslog.py
 ```
 
 The script automatically identifies its own folder and creates the `results/` directory if it does not already exist.
@@ -211,10 +211,10 @@ The script automatically identifies its own folder and creates the `results/` di
 After the clustering results have been generated, open a terminal in the `visualization/` folder and run:
 
 ```bash
-python parallel\\\_boxplot\\\_clusters\\\_1\\\_2\\\_3.py
+python parallel_boxplot_clusters_1_2_3.py
 ```
 
-The visualization script reads `results/sites\\\_with\\\_candidate\\\_clusters.csv` and saves the PNG, PDF and cluster-mean CSV outputs in the `visualization/` folder.
+The visualization script reads `results/sites_with_candidate_clusters.csv` and saves the PNG, PDF and cluster-mean CSV outputs in the `visualization/` folder.
 
 ## Python dependencies
 
@@ -240,7 +240,7 @@ The Python workflow used the Python standard library and the official NumPy, Pan
 |Package|Functionality used in the script|Use in this analysis|Official documentation|
 |-|-|-|-|
 |Python `pathlib`|`Path`, `resolve()`, `parent`, `exists()`, `mkdir()`|Defines file locations for the Python script, checks that the input file exists, and creates the results folder.|[Python pathlib documentation](https://docs.python.org/3/library/pathlib.html)|
-|pandas|`read\_csv()` and `DataFrame.to\_csv()`|Reads the clustering input matrix and exports the tables as CSV files.|[pandas I/O documentation](https://pandas.pydata.org/docs/user_guide/io.html)|
+|pandas|`read_csv()` and `DataFrame.to_csv()`|Reads the clustering input matrix and exports the tables as CSV files.|[pandas I/O documentation](https://pandas.pydata.org/docs/user_guide/io.html)|
 |pandas|`DataFrame.groupby()`|Groups sites according to their assigned cluster so that cluster sizes and mean environmental profiles can be calculated.|[pandas DataFrame.groupby documentation](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.groupby.html)|
 |pandas|`DataFrame.merge()`|Combines the number of sites in each cluster with the calculated mean environmental profiles.|[pandas merge documentation](https://pandas.pydata.org/docs/reference/api/pandas.merge.html)|
 |pandas|`concat()`|Combines the environmental profile tables produced for the different cluster solutions.|[pandas concat documentation](https://pandas.pydata.org/docs/reference/api/pandas.concat.html)|
@@ -248,10 +248,10 @@ The Python workflow used the Python standard library and the official NumPy, Pan
 |SciPy|`scipy.cluster.hierarchy.linkage()`|Performs hierarchical agglomerative clustering using Ward's method and Euclidean distance.|[SciPy linkage documentation](https://docs.scipy.org/doc/scipy/reference/generated/scipy.cluster.hierarchy.linkage.html)|
 |SciPy|`scipy.cluster.hierarchy.fcluster()`|Converts the hierarchical clustering into separate cluster solutions containing 3-7 clusters.|[SciPy fcluster documentation](https://docs.scipy.org/doc/scipy/reference/generated/scipy.cluster.hierarchy.fcluster.html)|
 |SciPy|`scipy.cluster.hierarchy.dendrogram()`|Produces the full and truncated dendrograms from the hierarchical clustering result.|[SciPy dendrogram documentation](https://docs.scipy.org/doc/scipy/reference/generated/scipy.cluster.hierarchy.dendrogram.html)|
-|scikit-learn|`sklearn.metrics.silhouette\_score()`|Calculates the mean silhouette coefficient for each cluster solution so the alternatives can be compared.|[scikit-learn silhouette\_score documentation](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.silhouette_score.html)|
+|scikit-learn|`sklearn.metrics.silhouette_score()`|Calculates the mean silhouette coefficient for each cluster solution so the alternatives can be compared.|[scikit-learn silhouette_score documentation](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.silhouette_score.html)|
 |Matplotlib|`pyplot.figure()` and `pyplot.savefig()`|Creates the dendrogram figures and exports them as PNG files.|[Matplotlib figure documentation](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.figure.html) and [Matplotlib savefig documentation](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.savefig.html)|
 |NumPy|`sqrt()` and `arange()`|Defines the paired-variable scale adjustment and the plotting positions used in the cluster visualization.|[NumPy mathematical functions](https://numpy.org/doc/stable/reference/routines.math.html) and [NumPy arange documentation](https://numpy.org/doc/stable/reference/generated/numpy.arange.html)|
-|pandas|`to\_numeric()`, `isna()`, and `value\_counts()`|Validates the plotting fields, checks for missing values and counts the number of sites in each final cluster.|[pandas to\_numeric documentation](https://pandas.pydata.org/docs/reference/api/pandas.to_numeric.html), [pandas isna documentation](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.isna.html), and [pandas value\_counts documentation](https://pandas.pydata.org/docs/reference/api/pandas.Series.value_counts.html)|
+|pandas|`to_numeric()`, `isna()`, and `value_counts()`|Validates the plotting fields, checks for missing values and counts the number of sites in each final cluster.|[pandas to_numeric documentation](https://pandas.pydata.org/docs/reference/api/pandas.to_numeric.html), [pandas isna documentation](https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.isna.html), and [pandas value_counts documentation](https://pandas.pydata.org/docs/reference/api/pandas.Series.value_counts.html)|
 |Matplotlib|`Axes.boxplot()`, `Axes.plot()`, and `savefig()`|Creates the parallel box plot, adds the mean environmental profile of each cluster and exports the visualization as PNG and PDF.|[Matplotlib boxplot documentation](https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.boxplot.html), [Matplotlib plot documentation](https://matplotlib.org/stable/api/_as_gen/matplotlib.axes.Axes.plot.html), and [Matplotlib savefig documentation](https://matplotlib.org/stable/api/_as_gen/matplotlib.pyplot.savefig.html)|
 
 These sources describe the software implementation of the workflow. The academic support for Ward hierarchical clustering, Euclidean distance and silhouette analysis is listed under methodological references.
@@ -267,6 +267,7 @@ Ward (1963) is the basis for the hierarchical grouping procedure. Observations a
 
 ## Reproducibility and data availability
 
-The repository contains the clustering script, transformed clustering variables, cluster solutions, evaluation results, cluster profiles, dendrograms and environmental cluster visualization outputs. Raw archaeological site coordinates are not included. The spatial variables included in the clustering matrix (`C\\\_x` and `C\\\_y`) are transformed analytical variables rather than raw geographic coordinates.
+The repository contains the clustering script, transformed clustering variables, cluster solutions, evaluation results, cluster profiles, dendrograms and environmental cluster visualization outputs. Raw archaeological site coordinates are not included. The spatial variables included in the clustering matrix (`C_x` and `C_y`) are transformed analytical variables rather than raw geographic coordinates.
 
 The files in `results/` and `visualization/` are outputs generated from the clustering and visualization workflows and are included to make the analytical results readable without requiring the scripts to be rerun.
+

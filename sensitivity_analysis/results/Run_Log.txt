@@ -1,0 +1,25 @@
+THRACE AHP SENSITIVITY ANALYSIS
+==================================
+
+Run: 2026-08-11T20:58:06
+Sites in source CSV: 250
+Sites with documented intentional N/A values: 81
+Sites with unexpected missing criterion values: 0
+Intentional N/A handling: criterion omitted and remaining weights renormalized site-by-site
+Perturbation direction: both; adjacent steps: 1
+
+Cluster 1: baseline CR=0.074482; eligible sites=178
+Cluster 2: baseline CR=0.060137; eligible sites=41
+Cluster 3: baseline CR=0.075520; eligible sites=31
+
+Sensitivity runs: 90
+CR accepted: 90
+CR rejected: 0
+
+Outputs:
+  Sensitivity_Analysis_Master.xlsx
+  00_Data_Quality.csv
+  01_Baseline_Weights.csv
+  02_Pairwise_Sensitivity_Runs.csv
+  04_Criterion_Sensitivity_Summary.csv
+  03_Site_Level_Sensitivity.csv
